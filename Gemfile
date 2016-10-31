@@ -5,13 +5,16 @@ gem 'rails'
 gem 'puma'
 gem 'pg'
 # gem 'figaro'
-gem 'jbuilder'
+# gem 'jbuilder'
 gem 'redis'
 
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', '>= 2.0.0.beta2', require: false
 gem 'watir'
+
+gem 'will_paginate'
+gem 'api-pagination'
 
 group :development, :test do
   gem 'pry-byebug'

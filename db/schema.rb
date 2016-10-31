@@ -10,28 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027160720) do
-
+ActiveRecord::Schema.define(version: 20_161_027_160_720) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "items", force: :cascade do |t|
-    t.string   "full_name"
-    t.string   "brand"
-    t.integer  "sku"
-    t.string   "category_1"
-    t.integer  "product_code"
-    t.boolean  "in_stock"
-    t.text     "details"
-    t.text     "sizes"
-    t.string   "color"
-    t.float    "price"
-    t.string   "washing_instructions"
-    t.string   "materials"
-    t.text     "photo_urls"
-    t.string   "product_url"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+  create_table 'items', force: :cascade do |t|
+    t.string   'full_name'
+    t.string   'brand'
+    t.integer  'sku'
+    t.string   'category_1'
+    t.integer  'product_code'
+    t.boolean  'in_stock'
+    t.text     'details'
+    t.text     'sizes'
+    t.string   'color'
+    t.float    'price'
+    t.string   'washing_instructions'
+    t.string   'materials'
+    t.text     'photo_urls'
+    t.string   'product_url'
+    t.datetime 'created_at',           null: false
+    t.datetime 'updated_at',           null: false
   end
-
 end
