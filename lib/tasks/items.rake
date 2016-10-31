@@ -2,8 +2,9 @@ namespace :items do
   desc 'Updating all the items (async)'
   task update_all: :environment do
     items = Item.all
-    items.each do |user|
-      UpdateItemsJob.perform_later(user.id)
+    items.each do |item|
+      UpdateItemsJob.perform_now(item.id)
+      sleep 2
     end
   end
 
