@@ -54,7 +54,11 @@ class UpdateItemsJob < ApplicationJob
     puts "Done for item with ID: #{item.id} and SKU: #{item.sku} !"
 
   rescue Watir::Exception::UnknownObjectException => e
-    puts "*** ! Error scraping on item: id: #{item.id}, sku: #{item.sku}, error: #{e} ! ***"
+    puts "*** ! Error on item: id: #{item.id}, sku: #{item.sku}, error: #{e} ! ***"
+    item.save!
+    puts '*** ! Emegency save - Item is incomplete ! ***'
+  rescue Net::ReadTimeout => e
+    puts "*** ! Error on item: id: #{item.id}, sku: #{item.sku}, error: #{e} ! ***"
     item.save!
     puts '*** ! Emegency save - Item is incomplete ! ***'
   end
