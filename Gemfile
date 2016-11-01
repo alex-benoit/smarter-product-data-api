@@ -4,7 +4,7 @@ ruby '2.3.1'
 gem 'rails'
 gem 'puma'
 gem 'pg'
-# gem 'figaro'
+gem 'figaro'
 # gem 'jbuilder'
 gem 'redis'
 
@@ -15,6 +15,8 @@ gem 'watir'
 
 gem 'will_paginate'
 gem 'api-pagination'
+
+gem 'algoliasearch-rails'
 
 group :development, :test do
   gem 'pry-byebug'
