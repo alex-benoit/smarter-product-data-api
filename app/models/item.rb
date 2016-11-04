@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
   include AlgoliaSearch
 
+  # acts_as_copy_target
+
   default_scope { order('id ASC') }
 
   serialize :details, Array

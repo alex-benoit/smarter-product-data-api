@@ -18,6 +18,8 @@ gem 'api-pagination'
 
 gem 'algoliasearch-rails'
 
+# gem 'postgres-copy'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
