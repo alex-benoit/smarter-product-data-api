@@ -4,7 +4,7 @@ class UpdateItemsJob < ApplicationJob
   def perform(item_id)
     # Find the item in db
     item = Item.find(item_id)
-    puts "Updating item info with ID: #{item.id} and SKU: #{item.sku} ..."
+    puts "-> Updating item info with ID: #{item.id} and SKU: #{item.sku} ..."
     # Start Watir Browser with Phantom JS (headless browser)
     # Selenium::WebDriver::PhantomJS.path = 'bin/phantomjs'
     browser = Watir::Browser.new(:phantomjs)
@@ -24,8 +24,12 @@ class UpdateItemsJob < ApplicationJob
     browser.div(class: 'product-description').ul.lis.each { |i| new_details.push(i.text) unless i.text.empty? } if browser.div(class: 'product-description').ul.present?
     item.details = new_details
     # Get the item sizes with marked if size is not available
-    new_sizes = []
-    browser.div(class: 'size-section').select.options.each { |o| new_sizes.push(o.text) unless o.text == 'Please select' } if browser.div(class: 'size-section').select.present?
+    if browser.div(class: 'size-section').select.present?
+      new_sizes = {}
+      browser.div(class: 'size-section').select.options.each do |o|
+        ((o.text.include? 'Not available') ? new_sizes[o.text.chomp(" - Not available")] = false : new_sizes[o.text] = true) unless o.text == 'Please select'
+      end
+    end
     item.sizes = new_sizes
     # Get the item color
     item.color = browser.span(class: 'product-colour').text if browser.span(class: 'product-colour').present?
@@ -51,7 +55,7 @@ class UpdateItemsJob < ApplicationJob
     browser.close
     # Save the item
     item.save!
-    puts "Done for item with ID: #{item.id} and SKU: #{item.sku} !"
+    puts "-> Done for item with ID: #{item.id} and SKU: #{item.sku} !"
 
   rescue Watir::Exception::UnknownObjectException => e
     puts "*** ! Error on item: id: #{item.id}, sku: #{item.sku}, error: #{e} ! ***"

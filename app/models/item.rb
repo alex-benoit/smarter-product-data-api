@@ -1,13 +1,9 @@
 class Item < ApplicationRecord
-  include AlgoliaSearch
+  # include AlgoliaSearch
 
   # acts_as_copy_target
 
   default_scope { order('id ASC') }
-
-  serialize :details, Array
-  serialize :sizes, Array
-  serialize :photo_urls, Array
 
   algoliasearch index_name: "#{name}#{ENV['ALGOLIA_SUFFIX']}" do
     add_attribute :updated_at_i

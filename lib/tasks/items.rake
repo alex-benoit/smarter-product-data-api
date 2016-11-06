@@ -4,7 +4,7 @@ namespace :items do
     items = Item.all
     items.each do |item|
       UpdateItemsJob.perform_now(item.id)
-      sleep 15
+      sleep 3
     end
   end
 

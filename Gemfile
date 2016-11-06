@@ -16,7 +16,7 @@ gem 'watir'
 gem 'will_paginate'
 gem 'api-pagination'
 
-gem 'algoliasearch-rails'
+# gem 'algoliasearch-rails'
 
 # gem 'postgres-copy'
 
