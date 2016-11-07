@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < ActionController::API
   def home
     render json: {
       items: '.../v1/items',

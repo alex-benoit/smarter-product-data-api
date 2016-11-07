@@ -71,6 +71,10 @@ GEM
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     pg (0.19.0)
+    pg_search (1.0.6)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -153,6 +157,7 @@ DEPENDENCIES
   figaro
   listen (~> 3.0.5)
   pg
+  pg_search
   pry-byebug
   pry-rails
   puma

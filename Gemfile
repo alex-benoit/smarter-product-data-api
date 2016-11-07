@@ -13,13 +13,11 @@ gem 'redis'
 # gem 'sinatra', '>= 2.0.0.beta2', require: false
 gem 'watir'
 
+gem 'pg_search'
+
 # pagination
 gem 'will_paginate'
 gem 'api-pagination'
-
-# gem 'algoliasearch-rails'
-
-# gem 'postgres-copy'
 
 group :development, :test do
   gem 'pry-byebug'
