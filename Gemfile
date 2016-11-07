@@ -13,6 +13,7 @@ gem 'sidekiq-failures'
 gem 'sinatra', '>= 2.0.0.beta2', require: false
 gem 'watir'
 
+# pagination
 gem 'will_paginate'
 gem 'api-pagination'
 
