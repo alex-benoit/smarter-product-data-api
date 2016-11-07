@@ -4,7 +4,7 @@ class V1::ItemsController < V1::BaseController
     filter_params(params).each do |key, value|
       items = items.public_send(key, value) if value.present?
     end
-    paginate json: items
+    paginate json: items, per_page: 20
   end
 
   def show

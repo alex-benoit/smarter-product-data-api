@@ -16,7 +16,7 @@ gem 'watir'
 gem 'pg_search'
 
 # pagination
-gem 'will_paginate'
+gem 'kaminari'
 gem 'api-pagination'
 
 group :development, :test do
