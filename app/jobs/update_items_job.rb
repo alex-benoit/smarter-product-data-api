@@ -1,12 +1,10 @@
 class UpdateItemsJob < ApplicationJob
-  queue_as :default
-
+  # queue_as :default
   def perform(item_id)
     # Find the item in db
     item = Item.find(item_id)
     puts "-> Updating item info with ID: #{item.id} and SKU: #{item.sku} ..."
     # Start Watir Browser with Phantom JS (headless browser)
-    # Selenium::WebDriver::PhantomJS.path = 'bin/phantomjs'
     browser = Watir::Browser.new(:phantomjs)
     browser.goto("http://www.asos.com/prd/#{item.sku}")
     # Get the item name
@@ -24,10 +22,10 @@ class UpdateItemsJob < ApplicationJob
     browser.div(class: 'product-description').ul.lis.each { |i| new_details.push(i.text) unless i.text.empty? } if browser.div(class: 'product-description').ul.present?
     item.details = new_details
     # Get the item sizes with marked if size is not available
+    new_sizes = {}
     if browser.div(class: 'size-section').select.present?
-      new_sizes = {}
       browser.div(class: 'size-section').select.options.each do |o|
-        ((o.text.include? 'Not available') ? new_sizes[o.text.chomp(" - Not available")] = false : new_sizes[o.text] = true) unless o.text == 'Please select'
+        (o.text.include?('Not available') ? new_sizes[o.text.chomp(' - Not available')] = false : new_sizes[o.text] = true) unless o.text == 'Please select'
       end
     end
     item.sizes = new_sizes
@@ -38,7 +36,14 @@ class UpdateItemsJob < ApplicationJob
     # Get the item washing instuctions
     item.washing_instructions = browser.div(class: 'care-info').p.text if browser.div(class: 'care-info').p.present?
     # Get the item materials
-    item.materials = browser.div(class: 'about-me').p.text if browser.div(class: 'about-me').p.present?
+    new_materials = {}
+    if browser.div(class: 'about-me').p.present?
+      mat_arr = browser.div(class: 'about-me').p.text.delete(' ').chomp('.').split(/,|:/)
+      mat_arr.each do |elem|
+        elem.exclude?('%') ? new_materials[elem.downcase] = {} : new_materials[new_materials.keys.last][elem.split('%')[1].downcase] = elem.split('%')[0].to_i
+      end
+    end
+    item.materials = new_materials
     # Get the item list of photos
     new_photos = []
     if browser.div(class: 'product-gallery').div(class: 'thumbnails').ul.present?

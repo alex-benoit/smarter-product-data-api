@@ -12,7 +12,7 @@ class CreateItems < ActiveRecord::Migration[5.0]
       t.string :color
       t.float :price
       t.string :washing_instructions
-      t.string :materials
+      t.jsonb :materials, default: {}
       t.string :photo_urls, array: true, default: []
       t.string :product_url
 

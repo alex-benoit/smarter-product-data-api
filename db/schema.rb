@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20161027160720) do
     t.string   "color"
     t.float    "price"
     t.string   "washing_instructions"
-    t.string   "materials"
+    t.jsonb    "materials",            default: {}
     t.string   "photo_urls",           default: [],              array: true
     t.string   "product_url"
     t.datetime "created_at",                        null: false
