@@ -15,6 +15,6 @@ class V1::ItemsController < V1::BaseController
   private
 
   def filter_params(params)
-    params.slice(:full_name, :brand, :sku, :category_1, :product_code, :in_stock, :details, :color, :price_under, :price_over)
+    params.slice(:full_name, :brand, :sku, :category_1, :product_code, :in_stock, :details, :color, :min_price, :max_price)
   end
 end
