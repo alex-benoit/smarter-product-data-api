@@ -11,6 +11,6 @@ class Item < ApplicationRecord
   scope :in_stock, -> (in_stock) { where in_stock: in_stock }
   pg_search_scope :details, against: :details
   pg_search_scope :color, against: :color # THIS COULD BE A CHOSEN DROPDOWN
-  scope :price_under, -> (price) { where 'price < ?', price }
-  scope :price_over, -> (price) { where 'price > ?', price }
+  scope :min_price, -> (min_price) { where 'min_price >= ?', min_price }
+  scope :max_price, -> (max_price) { where 'max_price <= ?', max_price }
 end
