@@ -6,7 +6,7 @@ gem 'puma'
 gem 'pg'
 gem 'figaro'
 # gem 'jbuilder'
-gem 'redis'
+# gem 'redis'
 
 # gem 'sidekiq'
 # gem 'sidekiq-failures'

@@ -118,7 +118,6 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
-    redis (3.3.1)
     rubyzip (1.2.0)
     selenium-webdriver (3.0.0)
       childprocess (~> 0.5)
@@ -165,7 +164,6 @@ DEPENDENCIES
   pry-rails
   puma
   rails
-  redis
   spring
   spring-watcher-listen (~> 2.0.0)
   watir
