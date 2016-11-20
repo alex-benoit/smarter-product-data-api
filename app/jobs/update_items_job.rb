@@ -33,7 +33,7 @@ class UpdateItemsJob < ActiveJob::Base
     # Get the item price
     item.price = browser.span(class: 'current-price').text.delete('£').to_f if browser.span(class: 'current-price').present?
     # Get the item washing instuctions
-    item.washing_instructions = browser.div(class: 'care-info').p.text if browser.div(class: 'care-info').p.present?
+    item.washing_instructions = browser.div(class: 'care-info').span.text if browser.div(class: 'care-info').span.present?
     # Get the item materials
     new_materials = {}
     if browser.div(class: 'about-me').span.present?

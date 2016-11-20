@@ -16,7 +16,7 @@ namespace :items do
 
   desc 'Updating a range of items (sync)'
   task :update_range, [:start_id] => :environment do |_t, args|
-    items = Item.all[(args[:start_id].to_i..(args[:start_id].to_i + 20))]
+    items = Item.all[(args[:start_id].to_i..(args[:start_id].to_i + 120))]
     items.each do |item|
       UpdateItemsJob.perform_now(item.id)
       sleep 3
