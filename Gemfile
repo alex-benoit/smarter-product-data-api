@@ -8,9 +8,9 @@ gem 'figaro'
 # gem 'jbuilder'
 # gem 'redis'
 
-# gem 'sidekiq'
-# gem 'sidekiq-failures'
-# gem 'sinatra', '>= 2.0.0.beta2', require: false
+gem 'sidekiq'
+gem 'sidekiq-failures'
+gem 'sinatra'
 gem 'watir'
 
 gem 'pg_search'
