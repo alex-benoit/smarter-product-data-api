@@ -22,4 +22,13 @@ namespace :items do
       sleep 3
     end
   end
+
+  desc 'Updating at restart (sync)'
+  task :update_restart, [:start_id] => :environment do |_t, args|
+    items = Item.all[(args[:start_id].to_i..999_999_999_999)]
+    items.each do |item|
+      UpdateItemsJob.perform_now(item.id)
+      sleep 3
+    end
+  end
 end
