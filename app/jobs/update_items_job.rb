@@ -14,7 +14,7 @@ class UpdateItemsJob < ActiveJob::Base
     # Get the item category
     item.category_1 = browser.div(class: 'product-description').strong.text if browser.div(class: 'product-description').strong.present?
     # Get the item product code
-    item.product_code = browser.div(class: 'product-code').p.text if browser.div(class: 'product-code').present?
+    item.product_code = browser.div(class: 'product-code').span.text if browser.div(class: 'product-code').present?
     # Check if the item is in stock/is continued
     item.in_stock = browser.div(class: 'out-of-stock').text.empty? if browser.div(class: 'out-of-stock').present?
     # Get the item details
@@ -37,8 +37,8 @@ class UpdateItemsJob < ActiveJob::Base
     item.washing_instructions = browser.div(class: 'care-info').p.text if browser.div(class: 'care-info').p.present?
     # Get the item materials
     new_materials = {}
-    if browser.div(class: 'about-me').p.present?
-      mat_arr = browser.div(class: 'about-me').p.text.delete(' ').chomp('.').split(/,|:/)
+    if browser.div(class: 'about-me').span.present?
+      mat_arr = browser.div(class: 'about-me').span.text.delete(' ').chomp('.').split(/,|:/)
       mat_arr.each do |elem|
         elem.exclude?('%') ? new_materials[elem.downcase] = {} : new_materials[new_materials.keys.last][elem.split('%')[1].downcase] = elem.split('%')[0].to_i
       end
