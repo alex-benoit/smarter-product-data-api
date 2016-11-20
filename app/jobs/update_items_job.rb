@@ -1,6 +1,4 @@
 class UpdateItemsJob < ActiveJob::Base
-  queue_as :default
-
   def perform(item_id)
     # Find the item in db
     item = Item.find(item_id)

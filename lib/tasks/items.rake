@@ -14,8 +14,12 @@ namespace :items do
     UpdateItemsJob.perform_now(item.id)
   end
 
-  desc 'Reindex the items on Aloglia'
-  task reindex: :environment do
-    Item.reindex!
+  desc 'Updating a range of items (sync)'
+  task :update_range, [:start_id] => :environment do |_t, args|
+    items = Item.all[(args[:start_id].to_i..(args[:start_id].to_i + 20))]
+    items.each do |item|
+      UpdateItemsJob.perform_now(item.id)
+      sleep 3
+    end
   end
 end
